@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>crawlbill: AI crawlers inflating your hosting bill?</title>
+<meta name="description" content="Send us your hosting bill. We find how much of it is AI crawlers and cut it. You pay only from the savings.">
+<meta property="og:title" content="AI crawlers inflating your hosting bill?">
+<meta property="og:description" content="Send us your bill. We find the crawler share and cut it. You pay only from the savings.">
+<meta property="og:url" content="https://crawlbill.anas.link">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+/* Hallmark · checked: 2026-10-29 · genre: modern-minimal (inferred)
+ * floor: 0 FAIL · fixed: 6 (34, 48, 46a, 26b, 39b, 49b) · structural: 5 printed (58, 59, 77, 78, 79)
+ * built: the project · redesign: polish · v2.0.0 */
+/* Hallmark · dropped 70% · 46a names the invented figure; the margin note asks instead */
+  :root {
+    --desk: #dde3ea;
+    --paper: #fbfcfd;
+    --ink: #1c2430;
+    --ink-2: #2d3a4c;
+    --muted: #556070;
+    --rule: #c5ced8;
+    --highlight: #f5e663;
+    --pen: #c8312b;
+    --link: #1f4fd1;
+    --code-ink: #e9eef3;
+    --code-dim: #8d99a8;
+    --shadow: rgba(28, 36, 48, 0.45);
+    --font-body: "Schibsted Grotesk", system-ui, sans-serif;
+    --font-hand: "Caveat", cursive;
+    --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 112.5%; }
+  html, body { overflow-x: clip; }
+  body {
+    margin: 0;
+    background: var(--desk);
+    color: var(--ink);
+    font: 400 1rem/1.55 var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--link); text-underline-offset: 0.15em; }
+  :focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
+
+  .wrap { max-width: 68rem; margin: 0 auto; padding: 0 1.5rem; }
+  header.top { padding: 1.5rem 0; font-weight: 800; letter-spacing: -0.01em; }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 27rem);
+    gap: 4rem;
+    align-items: center;
+    padding: 2.5rem 0 5rem;
+  }
+  h1 {
+    font-size: clamp(2.4rem, 5.4vw, 4.1rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    font-weight: 800;
+    margin: 0 0 1.25rem;
+  }
+  h1, h2 { text-wrap: balance; overflow-wrap: break-word; min-width: 0; }
+  p, dd, li { text-wrap: pretty; }
+  .lede { font-size: 1.3rem; line-height: 1.4; margin: 0 0 2rem; max-width: 30rem; }
+  .lede strong { font-weight: 700; }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    white-space: nowrap;
+    transition: background-color 150ms ease-out, transform 80ms ease-out;
+    background: var(--ink);
+    color: var(--paper);
+    font: inherit;
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 0 1.5rem;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .cta:hover { background: var(--ink-2); }
+  .cta:active { transform: translateY(1px); }
+  .cta:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+  .cta-note a { white-space: nowrap; }
+  .cta-note { display: block; margin-top: 0.75rem; color: var(--muted); font-size: 0.9rem; }
+
+  .invoice {
+    position: relative;
+    background: var(--paper);
+    padding: 1.75rem 1.75rem 1.5rem;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 var(--rule), 0 18px 40px -24px var(--shadow);
+    transform: rotate(1.2deg);
+    font-size: 0.9rem;
+  }
+  .invoice-head { display: flex; justify-content: space-between; color: var(--muted); margin-bottom: 1.25rem; }
+  .invoice-head b { color: var(--ink); font-weight: 700; }
+  .invoice table { width: 100%; border-collapse: collapse; }
+  .invoice td { padding: 0.55rem 0; border-top: 1px solid var(--rule); vertical-align: top; }
+  .invoice td:last-child { text-align: right; white-space: nowrap; padding-left: 1rem; }
+  .invoice .qty { display: block; color: var(--muted); font-size: 0.8rem; }
+  .invoice tr.total td { border-top: 2px solid var(--ink); font-weight: 800; font-size: 1.05rem; padding-top: 0.7rem; }
+  .invoice mark {
+    background: linear-gradient(var(--highlight), var(--highlight)) no-repeat 0 60% / 100% 80%;
+    color: inherit;
+    padding: 0 0.15em;
+    margin: 0 -0.15em;
+    animation: swipe 0.7s cubic-bezier(.3,.6,.3,1) both;
+  }
+  .invoice tr:nth-child(3) mark { animation-delay: 0.45s; }
+  @keyframes swipe { from { background-size: 0% 80%; } }
+  .margin-note {
+    margin: 1.1rem 0 0 auto;
+    max-width: 15rem;
+    transform: rotate(-3deg);
+    font: 600 1.5rem/1.05 var(--font-hand);
+    color: var(--pen);
+    text-align: right;
+  }
+  .invoice-caption { margin: 1rem 0 0; color: var(--muted); font-size: 0.75rem; }
+
+  main section { padding: 3.5rem 0; border-top: 1px solid var(--rule); }
+  .cols { display: grid; grid-template-columns: 16rem minmax(0, 40rem); gap: 3rem; }
+  .cols > * { min-width: 0; }
+  h2 { font-size: 1.5rem; line-height: 1.2; letter-spacing: -0.02em; margin: 0; font-weight: 800; }
+  .cols p { margin: 0 0 1rem; }
+  .cols p:last-child { margin-bottom: 0; }
+
+  ol.steps { list-style: none; counter-reset: step; margin: 0; padding: 0; }
+  ol.steps li { counter-increment: step; position: relative; padding-left: 2.75rem; margin-bottom: 1.5rem; }
+  ol.steps li:last-child { margin-bottom: 0; }
+  ol.steps li::before {
+    content: counter(step);
+    position: absolute; left: 0; top: 0.05rem;
+    width: 1.75rem; height: 1.75rem;
+    border: 2px solid var(--ink); border-radius: 50%;
+    display: grid; place-items: center;
+    font-weight: 800; font-size: 0.85rem;
+  }
+  ol.steps b { display: block; }
+
+  pre {
+    margin: 0 0 1rem;
+    background: var(--ink);
+    color: var(--code-ink);
+    padding: 1rem 1.25rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    font: 0.85rem/1.55 var(--font-mono);
+  }
+  pre .dim { color: var(--code-dim); }
+  pre .hl { color: var(--highlight); }
+  p code { font: 0.85em var(--font-mono); background: var(--rule); padding: 0.1em 0.35em; border-radius: 3px; }
+
+  dl { margin: 0; }
+  dt { font-weight: 700; }
+  dd { margin: 0.25rem 0 1.5rem; }
+  dd:last-child { margin-bottom: 0; }
+
+  .closing { padding: 4rem 0 5rem; }
+  .closing h2 { font-size: clamp(1.8rem, 3.5vw, 2.4rem); margin-bottom: 1.5rem; max-width: 36rem; }
+  footer p { margin: 0; padding: 2rem 0 3rem; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--rule); }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; gap: 3rem; padding-bottom: 4rem; }
+    .invoice { transform: none; margin-right: 0.5rem; }
+    .cols { grid-template-columns: 1fr; gap: 1.25rem; }
+  }
+  @media (max-width: 480px) {
+    .invoice { padding: 1.25rem 1.1rem 1.1rem; }
+    pre { font-size: 0.72rem; padding: 0.9rem 1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .invoice mark { animation: none; }
+    .cta { transition: background-color 150ms linear; }
+    .cta:active { transform: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">crawlbill</header>
+
+  <div class="hero">
+    <div>
+      <h1>AI crawlers inflating your hosting bill?</h1>
+      <p class="lede">Send us the bill. We find how much of it is GPTBot, ClaudeBot, Bytespider and friends, then cut it. <strong>You pay only from the savings.</strong></p>
+      <button class="cta" type="button" data-tally-open="5XXNQo" data-tally-layout="modal" data-tally-width="560">Send us your bill</button>
+      <span class="cta-note">Takes two minutes. Or <a href="https://tally.so/r/5XXNQo">open the form in a new page</a>.</span>
+    </div>
+
+    <figure class="invoice" aria-label="Example hosting invoice with bandwidth and function charges highlighted">
+      <div class="invoice-head"><b>Invoice</b><span>October 2026</span></div>
+      <table>
+        <tr><td>Pro plan</td><td>$20.00</td></tr>
+        <tr><td><mark>Bandwidth overage</mark><span class="qty">1,180 GB &times; $0.15</span></td><td><mark>$177.00</mark></td></tr>
+        <tr><td><mark>Function invocations</mark><span class="qty">9.2M over included</span></td><td><mark>$55.20</mark></td></tr>
+        <tr><td>Build minutes</td><td>$4.00</td></tr>
+        <tr class="total"><td>Total due</td><td>$256.20</td></tr>
+      </table>
+      <p class="margin-note" aria-hidden="true">how much of this was bots that never send you a visitor?</p>
+      <figcaption class="invoice-caption">Illustrative numbers.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<main class="wrap">
+  <section class="cols">
+    <h2>Who this is for</h2>
+    <div>
+      <p>Docs sites, open-source project sites, forums and wikis, small SaaS and content sites. Anything on usage-billed hosting (Vercel, Netlify, Fly, Render, S3 and CloudFront, serverless functions) where every page fetch costs you money.</p>
+      <p>AI crawlers re-fetch whole sites, often daily, and many ignore caching hints. On metered hosting that shows up as a bandwidth or invocation spike nobody can explain.</p>
+    </div>
+  </section>
+
+  <section class="cols">
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><b>Send your latest bill.</b> Add access logs or the botcheck output below if you have them.</li>
+      <li><b>We tell you the crawler share, free.</b> Which bots, how much traffic, what it costs you per month.</li>
+      <li><b>If it’s worth fixing, we fix it on your current host.</b> Blocking, rate limits and caching rules for the crawlers that cost you, with search engines and real visitors left alone. You pay a share of the reduction. If the bill doesn’t go down, you pay nothing.</li>
+    </ol>
+  </section>
+
+  <section class="cols" id="botcheck">
+    <h2>Check your own logs first</h2>
+    <div>
+      <p>A single Python file, no dependencies. It reads nginx or Apache access logs (plain or .gz) on your machine and sends nothing anywhere.</p>
+<pre><code>curl -O https://crawlbill.anas.link/botcheck.py
+python3 botcheck.py /var/log/nginx/access.log*
+
+<span class="dim">AI crawler               operator        requests    %req      bytes  %bytes</span>
+GPTBot                   OpenAI             6,033   30.2%   365.6 MB   34.8%
+ClaudeBot                Anthropic          3,988   19.9%   222.1 MB   21.1%
+Bytespider               ByteDance          2,996   15.0%   211.0 MB   20.1%
+meta-externalagent       Meta               1,560    7.8%    77.5 MB    7.4%
+
+<span class="hl">AI crawlers total                          14,577   72.9%   876.2 MB   83.3%</span></code></pre>
+      <p><a href="/botcheck.py">Read the script</a> before you run it. Pass <code>--price-per-gb</code> with your host’s rate for a monthly cost estimate.</p>
+    </div>
+  </section>
+
+  <section class="cols">
+    <h2>Questions</h2>
+    <dl>
+      <dt>I’m already behind Cloudflare.</dt>
+      <dd>Turn on its AI crawler blocking. It’s free on every plan, and you probably don’t need us.</dd>
+      <dt>Will this hurt my search ranking?</dt>
+      <dd>No. Googlebot, Bingbot and the other search crawlers aren’t touched. Only crawlers that take content without sending traffic back get blocked or slowed.</dd>
+      <dt>Why not just robots.txt?</dt>
+      <dd>Most well-known crawlers respect it, but plenty don’t, and the user-triggered fetchers often don’t. It also does nothing about caching or crawl rate. It’s step one, not the whole fix.</dd>
+      <dt>What do you charge?</dt>
+      <dd>A share of what your bill goes down by, for a few months. The exact split depends on your size; you see it before anything changes.</dd>
+    </dl>
+  </section>
+
+  <section class="closing">
+    <h2>Got a bill that jumped and nobody knows why?</h2>
+    <button class="cta" type="button" data-tally-open="5XXNQo" data-tally-layout="modal" data-tally-width="560">Send us your bill</button>
+  </section>
+</main>
+
+<footer class="wrap"><p>Run by <a href="https://anas.link">Anas El Mhamdi</a>.</p></footer>
+
+<script async src="https://tally.so/widgets/embed.js"></script>
+</body>
+</html>

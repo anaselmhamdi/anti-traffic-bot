@@ -1,0 +1,6 @@
+:8080 {
+	root * /srv
+	encode gzip
+	header /botcheck.py Content-Type "text/plain; charset=utf-8"
+	file_server
+}
