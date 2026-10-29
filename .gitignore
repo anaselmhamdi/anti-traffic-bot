@@ -1,0 +1,5 @@
+.context/
+.env
+.hallmark/
+__pycache__/
+site/.hallmark/

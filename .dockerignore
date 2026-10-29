@@ -1,0 +1,6 @@
+.context
+.env
+.git
+.hallmark
+site/.hallmark
+tests
