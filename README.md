@@ -23,7 +23,7 @@ zcat access.log.*.gz | python3 botcheck.py - --price-per-gb 0.09 --json
 ```bash
 python3 -m unittest discover tests
 python3 -m http.server -d site 8000
-fly deploy --ha=false --remote-only
+fly deploy --ha=false --remote-only   # CI deploys automatically on push to main
 ```
 
 ## DNS
